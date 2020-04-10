@@ -40,4 +40,9 @@ public class ExpenseRegistrationController {
     public List<StatusExpense> allStatusExpense() {
         return Arrays.asList(StatusExpense.values());
     }
+
+    @RequestMapping
+    public String searchExpense() {
+        return "expense-search";
+    }
 }
