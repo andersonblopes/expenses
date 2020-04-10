@@ -1,5 +1,8 @@
 package com.lopes.expenses.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,8 +18,11 @@ public class Expense {
     @Column(name = "expense_description")
     private String description;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date expenseDate;
+
+    @NumberFormat(pattern = "#,##0.00")
     private BigDecimal value;
 
     @Enumerated(EnumType.STRING)
