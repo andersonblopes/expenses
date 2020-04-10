@@ -5,6 +5,7 @@ import com.lopes.expenses.repository.ExpenseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/expense")
@@ -22,8 +23,10 @@ public class ExpenseRegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(Expense expense) {
+    public ModelAndView save(Expense expense) {
         expenseRepository.save(expense);
-        return "expense-registration";
+        ModelAndView view = new ModelAndView("expense-registration");
+        view.addObject("message", "Expense included successfully");
+        return view;
     }
 }
