@@ -7,12 +7,58 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="/image/logo.jpg" width="40" height="40" alt="">
-    </a>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="/image/logo.jpg" alt="Lopes" width="40" height="40">
+            </a>
+        </div>
+    </div>
 </nav>
+
+<form class="form-horizontal">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">New Expense</h1>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="expense-description" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="expense-description"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="expense-date-payment" class="col-sm-2 control-label">Payment date</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="expense-date-payment"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="expense-value" class="col-sm-2 control-label">Value</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="expense-value"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">Status</label>
+                <div class="col-sm-2">
+                    <select class="form-control" id="status">
+                        <option>Pending</option>
+                        <option>Payed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <script src="/js/bootstrap.min.js"></script>
 </body>
