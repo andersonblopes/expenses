@@ -51,8 +51,8 @@
                 <label for="status" class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-2">
                     <select class="form-control" id="status" name="status">
-                        <option value="PENDING">Pending</option>
-                        <option VALUE="DONE">Done</option>
+                        <option th:each="status : ${statusExpense}" th:value="${status}"
+                                th:text="${status.description}"/>
                     </select>
                 </div>
             </div>

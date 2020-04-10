@@ -4,7 +4,8 @@ public enum StatusExpense {
 
     //TODO Implements internationalization
     PENDING("Pending"),
-    DONE("Done");
+    DONE("Done"),
+    CANCELED("Canceled");
 
     private String description;
 
