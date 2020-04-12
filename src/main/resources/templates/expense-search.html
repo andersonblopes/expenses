@@ -34,7 +34,7 @@
                     <td class="text-center" th:text="${e.id}"/>
                     <td th:text="${e.description}"/>
                     <td class="text-center" th:text="${{e.expenseDate}}"/>
-                    <td class="text-right" th:text="|R$ ${{e.value}}|"/>
+                    <td class="text-right" th:text="|€ ${{e.value}}|"/>
                     <td class="text-center">
                         <!--<span class="label"
                             th:classappend="${#strings.toString(e.status) == 'PENDING'  ?  'label-danger' : 'label-success'}"
@@ -46,7 +46,9 @@
 
                     </td>
                     <th class="text-center">
-
+                        <a class="btn btn-link btn-xs" th:href="@{/expense/{id}(id=${e.id})}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
                     </th>
                 </tr>
                 <tr>
