@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -15,13 +16,19 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Description cannot be empty ")
+    @Size(max = 60, message = "Description must be no longer than 60 characters.")
     @Column(name = "expense_description")
     private String description;
 
+    @NotNull(message = "Expense date is required.")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date expenseDate;
 
+    @NotNull(message = "Expense value cannot be empty")
+    @DecimalMin(value = "0.01", message = "Value cannot be less than 0.01")
+    @DecimalMax(value = "99999999999.99", message = "Value cannot be greater than 99999999999,99")
     @NumberFormat(pattern = "#,##0.00")
     private BigDecimal value;
 

@@ -4,6 +4,8 @@ import com.lopes.expenses.model.Expense;
 import com.lopes.expenses.model.StatusExpense;
 import com.lopes.expenses.repository.ExpenseRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,13 +27,18 @@ public class ExpenseRegistrationController {
     @RequestMapping("/new")
     public ModelAndView newExpense() {
         ModelAndView view = new ModelAndView("expense-registration");
+        view.addObject("expense", new Expense());
         return view;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(Expense expense) {
-        expenseRepository.save(expense);
+    public ModelAndView save(@Validated Expense expense, Errors errors) {
         ModelAndView view = new ModelAndView("expense-registration");
+        if (errors.hasErrors()) {
+            return view;
+        }
+        expenseRepository.save(expense);
+
         view.addObject("message", "Expense included successfully");
         return view;
     }

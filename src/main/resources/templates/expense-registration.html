@@ -9,11 +9,8 @@
 
 <section layout:fragment="content">
 
-    <form class="form-horizontal" method="post" action="/expense">
-        <div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
-            <span th:text="${message}"/>
-        </div>
-
+    <form class="form-horizontal" method="post" action="/expense" th:object="${expense}">
+        <div layout:insert="message"></div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="clearfix">
@@ -23,19 +20,19 @@
             </div>
 
             <div class="panel-body">
-                <div class="form-group">
+                <div class="form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
                     <label for="expense-description" class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="expense-description" name="description"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" th:classappend="${#fields.hasErrors('expenseDate')} ? has-error">
                     <label for="expense-date-payment" class="col-sm-2 control-label">Payment date</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" id="expense-date-payment" name="expenseDate"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" th:classappend="${#fields.hasErrors('value')} ? has-error">
                     <label for="expense-value" class="col-sm-2 control-label">Value</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" id="expense-value" name="value"/>
