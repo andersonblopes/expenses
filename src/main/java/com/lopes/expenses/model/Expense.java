@@ -68,6 +68,10 @@ public class Expense {
         this.status = status;
     }
 
+    public boolean isPending() {
+        return status.equals(StatusExpense.PENDING);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

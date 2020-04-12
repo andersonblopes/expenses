@@ -42,7 +42,10 @@ public class ExpenseRegistrationController {
     }
 
     @RequestMapping
-    public String searchExpense() {
-        return "expense-search";
+    public ModelAndView searchExpense() {
+        List<Expense> allExpenses = expenseRepository.findAll();
+        ModelAndView view = new ModelAndView("expense-search");
+        view.addObject("expenses", allExpenses);
+        return view;
     }
 }
