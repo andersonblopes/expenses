@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,15 +33,13 @@ public class ExpenseRegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@Validated Expense expense, Errors errors) {
-        ModelAndView view = new ModelAndView("expense-registration");
+    public String save(@Validated Expense expense, Errors errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
-            return view;
+            return "expense-registration";
         }
         expenseRepository.save(expense);
-
-        view.addObject("message", "Expense included successfully");
-        return view;
+        redirectAttributes.addFlashAttribute("message", "Expense included successfully");
+        return "redirect:/expense/new";
     }
 
     @ModelAttribute("statusExpense")
