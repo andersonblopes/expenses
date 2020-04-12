@@ -36,9 +36,14 @@
                     <td class="text-center" th:text="${{e.expenseDate}}"/>
                     <td class="text-right" th:text="|R$ ${{e.value}}|"/>
                     <td class="text-center">
+                        <!--<span class="label"
+                            th:classappend="${#strings.toString(e.status) == 'PENDING'  ?  'label-danger' : 'label-success'}"
+                            h:text="${e.status.description}"/>
+                        -->
                         <span class="label"
                               th:classappend="${e.pending ?  'label-danger' : 'label-success'}"
                               th:text="${e.status.description}"/>
+
                     </td>
                     <th class="text-center">
 
