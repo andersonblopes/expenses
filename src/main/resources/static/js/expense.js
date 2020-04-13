@@ -7,7 +7,7 @@ $('#confirmation-dialog').on('show.bs.modal', function (event) {
 
     var modal = $(this);
     var form = modal.find('form');
-    var action = form.attr('action');
+    var action = form.data('base-url');
     if (!action.endsWith('/')) {
         action += '/';
     }

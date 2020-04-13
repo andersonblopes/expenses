@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <div class="modal fade" id="confirmation-dialog" tabindex="-1" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
-        <form action="/expense" method="POST">
+        <form th:attr="data-base-url='/expense'" method="POST">
             <input type="hidden" name="_method" value="DELETE"/>
             <div class="modal-content">
                 <div class="modal-header">
