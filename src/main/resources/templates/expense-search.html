@@ -8,6 +8,9 @@
 </head>
 
 <section layout:fragment="content">
+
+    <div layout:insert="message"></div>
+
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -46,8 +49,12 @@
 
                     </td>
                     <th class="text-center">
-                        <a class="btn btn-link btn-xs" th:href="@{/expense/{id}(id=${e.id})}">
+                        <a class="btn btn-link btn-xs" th:href="@{/expense/{id}(id=${e.id})}" title="Edit">
                             <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmation-dialog"
+                           title="Delete" th:attr="data-id=${e.id}, data-description=${e.description}">
+                            <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </th>
                 </tr>
@@ -57,6 +64,9 @@
                 </tbody>
             </table>
         </div>
+
+        <div layout:insert="confirmation-dialog"/>
+
     </div>
 </section>
 </html>

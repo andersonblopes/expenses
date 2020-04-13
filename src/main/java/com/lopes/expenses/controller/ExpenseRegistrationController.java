@@ -66,4 +66,12 @@ public class ExpenseRegistrationController {
         view.addObject(expense);
         return view;
     }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        expenseRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Expense excluded successfully");
+        return "redirect:/expense";
+    }
+
 }
