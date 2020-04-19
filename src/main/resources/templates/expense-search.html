@@ -21,12 +21,12 @@
         </div>
 
         <div class="panel-body">
-            <form method="get" class="form-horizontal">
+            <form method="get" class="form-horizontal" th:object="${filter}">
                 <div class="form-group">
                     <div class="col-sm-4">
                         <div class="input-group">
                             <input class="form-control" placeholder="Type description for search"
-                                   autofocus="autofocus" name="filterDescription"/>
+                                   autofocus="autofocus" th:field="*{filterDescription}"/>
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default" title="Search"
                                         rel="tooltip" data-placement="right">

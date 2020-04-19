@@ -2,6 +2,7 @@ package com.lopes.expenses.controller;
 
 import com.lopes.expenses.model.Expense;
 import com.lopes.expenses.model.StatusExpense;
+import com.lopes.expenses.repository.filter.ExpenseFilter;
 import com.lopes.expenses.service.ExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -98,12 +99,12 @@ public class ExpenseController {
     /**
      * Search expense model and view.
      *
-     * @param filterDescription the filter description
+     * @param filter the filter
      * @return the model and view
      */
     @RequestMapping
-    public ModelAndView searchExpense(String filterDescription) {
-        List<Expense> expensesFound = expenseService.findByFilter(filterDescription);
+    public ModelAndView searchExpense(@ModelAttribute("filter") ExpenseFilter filter) {
+        List<Expense> expensesFound = expenseService.findByFilter(filter);
         ModelAndView view = new ModelAndView(EXPENSE_SEARCH);
         view.addObject("expenses", expensesFound);
         return view;

@@ -3,6 +3,7 @@ package com.lopes.expenses.service;
 import com.lopes.expenses.model.Expense;
 import com.lopes.expenses.model.StatusExpense;
 import com.lopes.expenses.repository.ExpenseRepository;
+import com.lopes.expenses.repository.filter.ExpenseFilter;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -57,8 +58,8 @@ public class ExpenseService {
      * @param filter the filter
      * @return the list
      */
-    public List<Expense> findByFilter(String filter) {
-        return expenseRepository.findByDescriptionContaining(filter);
+    public List<Expense> findByFilter(ExpenseFilter filter) {
+        return expenseRepository.findByDescriptionContaining(filter.getFilterDescription() != null ? filter.getFilterDescription() : "");
     }
 
     /**
