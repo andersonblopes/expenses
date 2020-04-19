@@ -49,11 +49,13 @@
 
                     </td>
                     <th class="text-center">
-                        <a class="btn btn-link btn-xs" th:href="@{/expense/{id}(id=${e.id})}" title="Edit">
+                        <a class="btn btn-link btn-xs" th:href="@{/expense/{id}(id=${e.id})}" title="Edit"
+                           rel="tooltip" data-placement="top">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                         <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmation-dialog"
-                           title="Delete" th:attr="data-id=${e.id}, data-description=${e.description}">
+                           title="Delete" rel="tooltip" data-placement="top"
+                           th:attr="data-id=${e.id}, data-description=${e.description}">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </th>

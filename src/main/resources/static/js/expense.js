@@ -15,3 +15,7 @@ $('#confirmation-dialog').on('show.bs.modal', function (event) {
 
     modal.find('.modal-body span').html('Are you sure you want to delete the expense: <strong>' + expenseDescription + '</strong>?');
 });
+
+$(function () {
+    $('[rel="tooltip"]').tooltip();
+});

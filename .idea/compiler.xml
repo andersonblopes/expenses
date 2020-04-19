@@ -9,7 +9,7 @@
         <module name="expenses" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="14">
       <module name="expenses" target="14" />
     </bytecodeTargetLevel>
   </component>
