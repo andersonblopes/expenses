@@ -3,6 +3,7 @@ package com.lopes.expenses.controller;
 import com.lopes.expenses.model.Expense;
 import com.lopes.expenses.model.StatusExpense;
 import com.lopes.expenses.repository.ExpenseRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -18,14 +19,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/expense")
-public class ExpenseRegistrationController {
+public class ExpenseController {
 
     private final ExpenseRepository expenseRepository;
 
     private static final String EXPENSE_REGISTRATION = "expense-registration";
     private static final String EXPENSE_SEARCH = "expense-search";
 
-    public ExpenseRegistrationController(ExpenseRepository expenseRepository) {
+    public ExpenseController(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 
@@ -41,9 +42,16 @@ public class ExpenseRegistrationController {
         if (errors.hasErrors()) {
             return EXPENSE_REGISTRATION;
         }
-        expenseRepository.save(expense);
-        redirectAttributes.addFlashAttribute("message", "Expense included successfully");
-        return "redirect:/expense/new";
+
+        try {
+            expenseRepository.save(expense);
+            redirectAttributes.addFlashAttribute("message", "Expense included successfully");
+            return "redirect:/expense/new";
+        } catch (DataIntegrityViolationException e) {
+            errors.rejectValue("expenseDate", null, "Date invalid format!");
+            return EXPENSE_REGISTRATION;
+        }
+
     }
 
     @ModelAttribute("statusExpense")
