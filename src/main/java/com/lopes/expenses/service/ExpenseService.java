@@ -52,6 +52,16 @@ public class ExpenseService {
     }
 
     /**
+     * Find by filter list.
+     *
+     * @param filter the filter
+     * @return the list
+     */
+    public List<Expense> findByFilter(String filter) {
+        return expenseRepository.findByDescriptionContaining(filter);
+    }
+
+    /**
      * Delete by id.
      *
      * @param id the id

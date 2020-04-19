@@ -94,19 +94,20 @@ public class ExpenseController {
         return Arrays.asList(StatusExpense.values());
     }
 
+
     /**
      * Search expense model and view.
      *
+     * @param filterDescription the filter description
      * @return the model and view
      */
     @RequestMapping
-    public ModelAndView searchExpense() {
-        List<Expense> allExpenses = expenseService.findAll();
+    public ModelAndView searchExpense(String filterDescription) {
+        List<Expense> expensesFound = expenseService.findByFilter(filterDescription);
         ModelAndView view = new ModelAndView(EXPENSE_SEARCH);
-        view.addObject("expenses", allExpenses);
+        view.addObject("expenses", expensesFound);
         return view;
     }
-
 
     /**
      * Edit model and view.
