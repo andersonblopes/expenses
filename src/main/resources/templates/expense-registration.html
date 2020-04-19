@@ -9,14 +9,14 @@
 
 <section layout:fragment="content">
 
-    <form class="form-horizontal" method="post" action="/expense" th:object="${expense}">
+    <form class="form-horizontal" method="post" th:action="@{/expense}" th:object="${expense}">
         <div layout:insert="message"></div>
         <div layout:insert="message-error"></div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="clearfix">
                     <h1 class="panel-title lp-title-panel">Search Expense</h1>
-                    <A class="btn btn-link lp-link-panel" href="/expense">Search</A>
+                    <A class="btn btn-link lp-link-panel" th:href="@{/expense}">Search</A>
                 </div>
             </div>
 

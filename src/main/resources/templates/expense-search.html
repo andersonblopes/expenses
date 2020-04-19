@@ -16,12 +16,12 @@
         <div class="panel-heading">
             <div class="clearfix">
                 <h1 class="panel-title lp-title-panel">Search Expense</h1>
-                <A class="btn btn-link lp-link-panel" href="/expense/new">New Expense</A>
+                <A class="btn btn-link lp-link-panel" th:href="@{/expense/new}">New Expense</A>
             </div>
         </div>
 
         <div class="panel-body">
-            <form method="get" class="form-horizontal" th:object="${filter}">
+            <form method="get" class="form-horizontal" th:action="@{/expense}" th:object="${filter}">
                 <div class="form-group">
                     <div class="col-sm-4">
                         <div class="input-group">
