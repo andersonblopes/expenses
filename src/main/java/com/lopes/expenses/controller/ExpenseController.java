@@ -2,8 +2,7 @@ package com.lopes.expenses.controller;
 
 import com.lopes.expenses.model.Expense;
 import com.lopes.expenses.model.StatusExpense;
-import com.lopes.expenses.repository.ExpenseRepository;
-import org.springframework.dao.DataIntegrityViolationException;
+import com.lopes.expenses.service.ExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -21,13 +20,13 @@ import java.util.List;
 @RequestMapping("/expense")
 public class ExpenseController {
 
-    private final ExpenseRepository expenseRepository;
+    private ExpenseService expenseService;
 
     private static final String EXPENSE_REGISTRATION = "expense-registration";
     private static final String EXPENSE_SEARCH = "expense-search";
 
-    public ExpenseController(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;
+    public ExpenseController(ExpenseService expenseService) {
+        this.expenseService = expenseService;
     }
 
     @RequestMapping("/new")
@@ -44,11 +43,11 @@ public class ExpenseController {
         }
 
         try {
-            expenseRepository.save(expense);
+            expenseService.save(expense);
             redirectAttributes.addFlashAttribute("message", "Expense included successfully");
             return "redirect:/expense/new";
-        } catch (DataIntegrityViolationException e) {
-            errors.rejectValue("expenseDate", null, "Date invalid format!");
+        } catch (IllegalArgumentException e) {
+            errors.rejectValue("expenseDate", null, e.getMessage());
             return EXPENSE_REGISTRATION;
         }
 
@@ -61,7 +60,7 @@ public class ExpenseController {
 
     @RequestMapping
     public ModelAndView searchExpense() {
-        List<Expense> allExpenses = expenseRepository.findAll();
+        List<Expense> allExpenses = expenseService.findAll();
         ModelAndView view = new ModelAndView(EXPENSE_SEARCH);
         view.addObject("expenses", allExpenses);
         return view;
@@ -77,7 +76,7 @@ public class ExpenseController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        expenseRepository.deleteById(id);
+        expenseService.deleteById(id);
         redirectAttributes.addFlashAttribute("message", "Expense excluded successfully");
         return "redirect:/expense";
     }
