@@ -19,4 +19,30 @@ $('#confirmation-dialog').on('show.bs.modal', function (event) {
 $(function () {
     $('[rel="tooltip"]').tooltip();
     $('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
+
+    $('.js-update-status').on('click', function (event) {
+        event.preventDefault();
+
+        var btnReceive = $(event.currentTarget);
+        var urlReceive = btnReceive.attr('href');
+
+
+        var response = $.ajax({
+            url: urlReceive,
+            type: 'PUT'
+        });
+
+        response.done(function (e) {
+            var idExpense = btnReceive.data('id');
+            $('[data-role=' + idExpense + ']').html('<span class="label label-success">' + e + '</span>');
+            btnReceive.hide();
+        });
+
+        response.fail(function (e) {
+            console.log(e);
+            alert('Error receive expense');
+        });
+
+    });
+
 });

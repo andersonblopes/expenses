@@ -1,6 +1,7 @@
 package com.lopes.expenses.service;
 
 import com.lopes.expenses.model.Expense;
+import com.lopes.expenses.model.StatusExpense;
 import com.lopes.expenses.repository.ExpenseRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,21 @@ public class ExpenseService {
      */
     public void deleteById(Long id) {
         expenseRepository.deleteById(id);
+    }
+
+    /**
+     * Receive expense string.
+     *
+     * @param id the id
+     * @return the string
+     */
+    public String receiveExpense(Long id) {
+
+        Expense expense = expenseRepository.findById(id).get();
+        expense.setStatus(StatusExpense.DONE);
+        expenseRepository.save(expense);
+
+        return StatusExpense.DONE.getDescription();
+
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -134,4 +135,16 @@ public class ExpenseController {
         return "redirect:/expense";
     }
 
+
+    /**
+     * Receive expense string.
+     *
+     * @param id the id
+     * @return the string
+     */
+    @RequestMapping(value = "/{id}/receive", method = RequestMethod.PUT)
+    @ResponseBody
+    public String receiveExpense(@PathVariable Long id) {
+        return expenseService.receiveExpense(id);
+    }
 }

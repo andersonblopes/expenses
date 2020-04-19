@@ -38,11 +38,7 @@
                     <td th:text="${e.description}"/>
                     <td class="text-center" th:text="${{e.expenseDate}}"/>
                     <td class="text-right" th:text="|€ ${{e.value}}|"/>
-                    <td class="text-center">
-                        <!--<span class="label"
-                            th:classappend="${#strings.toString(e.status) == 'PENDING'  ?  'label-danger' : 'label-success'}"
-                            h:text="${e.status.description}"/>
-                        -->
+                    <td class="text-center" th:attr="data-role=${e.id}">
                         <span class="label"
                               th:classappend="${e.pending ?  'label-danger' : 'label-success'}"
                               th:text="${e.status.description}"/>
@@ -57,6 +53,14 @@
                            title="Delete" rel="tooltip" data-placement="top"
                            th:attr="data-id=${e.id}, data-description=${e.description}">
                             <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+
+                        <a class="btn btn-link btn-xs js-update-status" th:if="${e.pending}"
+                           title="Receive" rel="tooltip"
+                           data-placement="top"
+                           th:attr="data-id=${e.id}"
+                           th:href=" @{/expense/{id}/receive(id=${e.id})}">
+                            <span class="glyphicon glyphicon-check"></span>
                         </a>
                     </th>
                 </tr>
