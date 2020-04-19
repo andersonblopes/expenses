@@ -16,19 +16,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Expense controller.
+ */
 @Controller
 @RequestMapping("/expense")
 public class ExpenseController {
 
+    /**
+     * The Expense service.
+     */
     private ExpenseService expenseService;
 
+    /**
+     * The constant EXPENSE_REGISTRATION.
+     */
     private static final String EXPENSE_REGISTRATION = "expense-registration";
+    /**
+     * The constant EXPENSE_SEARCH.
+     */
     private static final String EXPENSE_SEARCH = "expense-search";
 
+    /**
+     * Instantiates a new Expense controller.
+     *
+     * @param expenseService the expense service
+     */
     public ExpenseController(ExpenseService expenseService) {
         this.expenseService = expenseService;
     }
 
+    /**
+     * New expense model and view.
+     *
+     * @return the model and view
+     */
     @RequestMapping("/new")
     public ModelAndView newExpense() {
         ModelAndView view = new ModelAndView(EXPENSE_REGISTRATION);
@@ -36,6 +58,14 @@ public class ExpenseController {
         return view;
     }
 
+    /**
+     * Save string.
+     *
+     * @param expense            the expense
+     * @param errors             the errors
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String save(@Validated Expense expense, Errors errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
@@ -53,11 +83,21 @@ public class ExpenseController {
 
     }
 
+    /**
+     * All status expense list.
+     *
+     * @return the list
+     */
     @ModelAttribute("statusExpense")
     public List<StatusExpense> allStatusExpense() {
         return Arrays.asList(StatusExpense.values());
     }
 
+    /**
+     * Search expense model and view.
+     *
+     * @return the model and view
+     */
     @RequestMapping
     public ModelAndView searchExpense() {
         List<Expense> allExpenses = expenseService.findAll();
@@ -67,6 +107,12 @@ public class ExpenseController {
     }
 
 
+    /**
+     * Edit model and view.
+     *
+     * @param expense the expense
+     * @return the model and view
+     */
     @RequestMapping("{id}")
     public ModelAndView edit(@PathVariable("id") Expense expense) {
         ModelAndView view = new ModelAndView(EXPENSE_REGISTRATION);
@@ -74,6 +120,13 @@ public class ExpenseController {
         return view;
     }
 
+    /**
+     * Delete string.
+     *
+     * @param id                 the id
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         expenseService.deleteById(id);

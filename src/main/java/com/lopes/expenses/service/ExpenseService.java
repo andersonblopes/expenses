@@ -7,15 +7,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Expense service.
+ */
 @Service
 public class ExpenseService {
 
+    /**
+     * The Expense repository.
+     */
     private final ExpenseRepository expenseRepository;
 
+    /**
+     * Instantiates a new Expense service.
+     *
+     * @param expenseRepository the expense repository
+     */
     public ExpenseService(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 
+    /**
+     * Save.
+     *
+     * @param expense the expense
+     */
     public void save(Expense expense) {
         try {
             expenseRepository.save(expense);
@@ -25,10 +41,20 @@ public class ExpenseService {
 
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List<Expense> findAll() {
         return expenseRepository.findAll();
     }
 
+    /**
+     * Delete by id.
+     *
+     * @param id the id
+     */
     public void deleteById(Long id) {
         expenseRepository.deleteById(id);
     }

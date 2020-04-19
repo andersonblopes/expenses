@@ -8,10 +8,18 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import javax.servlet.Filter;
 import java.util.Arrays;
 
+/**
+ * The type Browser security bean config.
+ */
 @Configuration
 public class BrowserSecurityBeanConfig {
 
-    //For DELETE as POST
+    /**
+     * Hidden http method filter filter registration bean.
+     *
+     * @return the filter registration bean
+     */
+//For DELETE as POST
     @Bean
     public FilterRegistrationBean<Filter> hiddenHttpMethodFilter() {
 
